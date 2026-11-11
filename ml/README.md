@@ -25,11 +25,18 @@ El paquete se instala en modo editable y lo importan **tanto los scripts de entr
 
 ## Instalación
 
+El script `scripts/configurar_entorno.sh` (o `.ps1`) ya instala el paquete con `dev` y `notebooks`, el modelo `en_core_web_sm` de spaCy y las *stopwords* de NLTK.
+
+Para entrenar DistilBERT en tu equipo (opcional, descarga varios GB; lo normal es usar Google Colab):
+
 ```bash
-pip install -e "ml[dev]"                 # mínimo
-pip install -e "ml[dev,notebooks]"       # + Jupyter y gráficos
-pip install -e "ml[transformers]"        # + PyTorch y Transformers (pesado)
-python -m spacy download en_core_web_sm
+uv pip install -e "ml[transformers]"
+```
+
+Para abrir los notebooks:
+
+```bash
+jupyter lab notebooks/
 ```
 
 ## Pruebas

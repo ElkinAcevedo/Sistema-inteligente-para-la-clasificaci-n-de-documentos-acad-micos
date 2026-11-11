@@ -1,8 +1,6 @@
 # Frontend · Dashboard web
 
-Aplicación de una sola página con **React 18 + TypeScript + Vite**, estilizada con **Tailwind CSS** y **shadcn/ui**, y con gráficos de **Recharts**.
-
-> El proyecto Vite se inicializa en la etapa de configuración del entorno.
+Aplicación de una sola página con **React 19 + TypeScript + Vite**, estilizada con **Tailwind CSS** y **shadcn/ui**, y con gráficos de **Recharts**.
 
 ## Vistas
 
@@ -13,23 +11,32 @@ Aplicación de una sola página con **React 18 + TypeScript + Vite**, estilizada
 | Historial | Tabla paginada con filtros por dominio, fecha y estado. |
 | Métricas | KPI del modelo activo, comparación de modelos y matriz de confusión. |
 
-## Estructura prevista
+## Estructura
 
 ```text
 frontend/
 ├── src/
-│   ├── api/          # cliente HTTP y tipos del contrato de la API
-│   ├── components/   # componentes reutilizables (ui/ = shadcn)
-│   ├── pages/        # Clasificar, Resultado, Historial, Metricas
-│   ├── hooks/
-│   └── lib/
-└── public/
+│   ├── api/cliente.ts    # cliente HTTP y tipos del contrato de la API
+│   ├── components/       # componentes reutilizables (Layout, tarjetas, gráficos)
+│   ├── pages/            # Clasificar, Historial, Metricas (Resultado: pendiente)
+│   ├── test/setup.ts     # configuración de Vitest + Testing Library
+│   ├── App.tsx           # rutas (React Router)
+│   └── index.css         # Tailwind CSS
+├── vite.config.ts        # alias @/ → src/, proxy /api → :8000, Vitest
+├── Dockerfile            # compila y sirve con Nginx
+└── nginx.conf
 ```
 
-## Ejecutar (cuando esté inicializado)
+Importa siempre con el alias `@/`, por ejemplo `import { api } from '@/api/cliente'`.
 
-```bash
-cd frontend
-npm install
-npm run dev      # http://localhost:5173
-```
+## Comandos
+
+| Comando | Qué hace |
+| --- | --- |
+| `npm install` | Instala dependencias. |
+| `npm run dev` | Servidor de desarrollo en <http://localhost:5173> (la API debe estar en el puerto 8000). |
+| `npm run build` | Verifica tipos y compila a `dist/`. |
+| `npm test` | Pruebas con Vitest. |
+| `npm run lint` | Revisión de estilo con oxlint. |
+
+Los componentes de shadcn/ui se agregarán a medida que se construyan las vistas (`npx shadcn@latest add <componente>`).

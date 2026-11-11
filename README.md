@@ -4,10 +4,10 @@
 
 **Aplicación web que clasifica documentos académicos por dominio y área temática usando Procesamiento de Lenguaje Natural y aprendizaje automático.**
 
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 ![Estado](https://img.shields.io/badge/estado-en%20desarrollo-orange)
 
@@ -93,12 +93,13 @@ clasificador-academico/
 │   ├── configs/             # hiperparámetros por modelo (YAML)
 │   └── tests/
 ├── frontend/                # dashboard web (React + TypeScript + Vite)
+├── docker-compose.yml       # levanta API + dashboard
 ├── notebooks/               # análisis exploratorio y comparación de modelos
 ├── data/                    # dataset crudo y procesado (no se versiona)
 ├── models/                  # modelos entrenados .joblib (no se versionan)
 ├── tests/e2e/               # pruebas de extremo a extremo (Playwright)
 ├── docs/                    # documentación y registro de decisiones
-└── scripts/                 # utilidades (descarga de datos, etc.)
+└── scripts/                 # configuración del entorno y utilidades
 ```
 
 Cada carpeta principal tiene su propio `README.md` con los detalles.
@@ -107,55 +108,88 @@ Cada carpeta principal tiene su propio `README.md` con los detalles.
 
 | Capa | Tecnología |
 | --- | --- |
-| Backend y ML | Python 3.11, FastAPI, Uvicorn, Pydantic |
+| Backend y ML | Python 3.12, FastAPI, Uvicorn, Pydantic |
 | PLN y modelos | scikit-learn, spaCy, NLTK, Hugging Face Transformers, PyTorch |
 | Extracción | PyMuPDF, python-docx, langdetect |
 | Datos | SQLite + SQLAlchemy, pandas, Parquet |
-| Frontend | React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, Recharts |
-| Pruebas | pytest, httpx, Vitest, Playwright |
-| Despliegue | Docker, Docker Compose, GitHub Actions |
+| Frontend | React 19, TypeScript, Vite, Tailwind CSS, shadcn/ui, Recharts |
+| Pruebas y calidad | pytest, httpx, ruff, Vitest, Testing Library, oxlint, Playwright |
+| Entorno y despliegue | uv, Docker, Docker Compose, GitHub Actions |
 
 ## Inicio rápido
 
-> El proyecto está en su fase inicial. Por ahora la API solo expone `GET /api/v1/salud`.
+> El proyecto está en su fase inicial. Por ahora la API solo expone `GET /api/v1/salud` y el dashboard muestra la navegación entre vistas.
 
 ### Requisitos
 
-- Python 3.11 o 3.12
-- Node.js 20 o superior (para el frontend)
-- Git
+| Herramienta | Versión | Instalación |
+| --- | --- | --- |
+| Git | cualquiera reciente | <https://git-scm.com> |
+| uv | 0.8 o superior | Linux/macOS: `curl -LsSf https://astral.sh/uv/install.sh \| sh`<br>Windows: `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 \| iex"` |
+| Node.js | 22 LTS | <https://nodejs.org> |
+| Docker *(opcional)* | 24 o superior | <https://docs.docker.com/get-docker/> |
 
-### Instalación del backend y el paquete ML
+No necesitas instalar Python a mano: `uv` descarga Python 3.12 solo para este proyecto, sin tocar el Python de tu sistema ni los entornos de otros proyectos.
+
+### 1. Clonar y configurar el entorno
 
 ```bash
 git clone https://github.com/<usuario>/clasificador-academico.git
 cd clasificador-academico
+```
 
-python -m venv .venv
+Ejecuta el script de configuración de tu sistema operativo. Crea el entorno `.venv` con Python 3.12, instala las dependencias de Python y Node y descarga los recursos de lenguaje (spaCy y NLTK):
+
+```bash
 # Linux / macOS
-source .venv/bin/activate
+./scripts/configurar_entorno.sh
+
 # Windows (PowerShell)
-.venv\Scripts\Activate.ps1
-
-pip install -e "ml[dev]" -e "backend[dev]"
+.\scripts\configurar_entorno.ps1
 ```
 
-### Ejecutar la API
+Luego activa el entorno en cada terminal nueva:
 
 ```bash
+source .venv/bin/activate        # Linux / macOS
+.venv\Scripts\Activate.ps1       # Windows
+```
+
+### 2. Ejecutar en desarrollo
+
+En dos terminales:
+
+```bash
+# Terminal 1 · API → http://localhost:8000/docs
 cd backend
-cp .env.example .env
 uvicorn app.main:app --reload
+
+# Terminal 2 · Dashboard → http://localhost:5173
+cd frontend
+npm run dev
 ```
 
-Abre <http://localhost:8000/docs> para ver la documentación interactiva.
+El dashboard redirige automáticamente las llamadas `/api` hacia la API.
 
-### Ejecutar las pruebas
+### 3. Ejecutar con Docker (sistema completo)
 
 ```bash
-pytest ml/tests
-cd backend && pytest
+docker compose up --build
 ```
+
+- Dashboard: <http://localhost:8080>
+- API: <http://localhost:8000/docs>
+
+### 4. Pruebas y calidad de código
+
+```bash
+ruff check backend ml              # estilo de Python
+pytest ml/tests                    # paquete ML
+cd backend && pytest --cov=app     # API
+cd frontend && npm run lint && npm test
+```
+
+GitHub Actions ejecuta todo esto en cada *push* y *pull request*.
 
 ## Dataset
 
@@ -168,7 +202,7 @@ El dataset **no se incluye en el repositorio** por su tamaño. Las instrucciones
 | I. Revisión y preparación de los datos | 1–2 | ⏳ Pendiente |
 | II. Extracción y procesamiento del texto | 2–4 | ⏳ Pendiente |
 | III. Entrenamiento y evaluación de modelos | 4–7 | ⏳ Pendiente |
-| IV. Desarrollo e integración de la aplicación | 6–9 | 🚧 Estructura base lista |
+| IV. Desarrollo e integración de la aplicación | 6–9 | 🚧 Estructura base y entorno listos |
 | V. Pruebas, ajustes y documentación | 10–12 | ⏳ Pendiente |
 
 ## Cómo contribuir

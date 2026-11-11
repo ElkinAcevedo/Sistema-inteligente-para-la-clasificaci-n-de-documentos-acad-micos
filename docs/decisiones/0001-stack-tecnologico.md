@@ -9,11 +9,11 @@ El sistema necesita PLN y aprendizaje automático, una API y un dashboard web, y
 
 ## Decisión
 
-- **Python 3.11** para el backend y el ML, con un paquete compartido (`clasificador_ml`) para que el preprocesamiento sea idéntico en entrenamiento y predicción.
+- **Python 3.12** (gestionado con **uv**) para el backend y el ML, con un paquete compartido (`clasificador_ml`) para que el preprocesamiento sea idéntico en entrenamiento y predicción.
 - **FastAPI** para la API: validación con Pydantic y documentación OpenAPI automática.
 - **scikit-learn** para TF-IDF, Naive Bayes y SVM; **Transformers + PyTorch** para DistilBERT.
 - **SQLite + SQLAlchemy** para la persistencia.
-- **React + TypeScript + Vite** con Tailwind CSS, shadcn/ui y Recharts para el dashboard.
+- **React 19 + TypeScript + Vite** con Tailwind CSS, shadcn/ui y Recharts para el dashboard.
 - **Docker Compose** para levantar todo con un solo comando.
 
 ## Alternativas consideradas

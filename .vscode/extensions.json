@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "ms-toolsai.jupyter",
+    "bradlc.vscode-tailwindcss",
+    "oxc.oxc-vscode",
+    "editorconfig.editorconfig",
+    "ms-azuretools.vscode-docker"
+  ]
+}

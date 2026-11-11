@@ -1,0 +1,25 @@
+# Levanta el sistema completo:  docker compose up --build
+# Dashboard: http://localhost:8080   ·   API: http://localhost:8000/docs
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      CLASIFICADOR_RUTA_MODELOS: /srv/models
+      CLASIFICADOR_URL_BASE_DATOS: sqlite:////srv/datos/clasificador.db
+    volumes:
+      - ./models:/srv/models:ro
+      - datos_api:/srv/datos
+    ports:
+      - "8000:8000"
+
+  web:
+    build: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  datos_api:

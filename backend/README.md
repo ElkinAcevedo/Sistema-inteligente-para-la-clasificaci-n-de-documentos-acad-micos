@@ -21,12 +21,10 @@ backend/
 
 ## Ejecutar
 
-Desde la raíz del repositorio, con el entorno virtual activado:
+Con el entorno configurado (`scripts/configurar_entorno.sh`) y activado:
 
 ```bash
-pip install -e "ml[dev]" -e "backend[dev]"
 cd backend
-cp .env.example .env
 uvicorn app.main:app --reload
 ```
 
