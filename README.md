@@ -134,7 +134,7 @@ No necesitas instalar Python a mano: `uv` descarga Python 3.12 solo para este pr
 ### 1. Clonar y configurar el entorno
 
 ```bash
-git clone https://github.com/<usuario>/clasificador-academico.git
+git clone https://github.com/ElkinAcevedo/Sistema-inteligente-para-la-clasificaci-n-de-documentos-acad-micos.git clasificador-academico
 cd clasificador-academico
 ```
 
