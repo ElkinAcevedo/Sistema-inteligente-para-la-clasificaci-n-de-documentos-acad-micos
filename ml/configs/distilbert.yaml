@@ -1,0 +1,6 @@
+modelo: distilbert-base-uncased
+max_longitud: 256
+epocas: 3
+tamano_lote: 32
+tasa_aprendizaje: 5.0e-5
+# Se entrena en Google Colab con GPU (ver notebooks/).

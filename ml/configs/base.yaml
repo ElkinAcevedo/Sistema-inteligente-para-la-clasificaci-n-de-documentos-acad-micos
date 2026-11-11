@@ -1,0 +1,19 @@
+# Parámetros compartidos por todos los experimentos (sección 6 del documento de diseño).
+semilla: 42
+
+particion:
+  entrenamiento: 0.70
+  validacion: 0.15
+  prueba: 0.15
+  estratificar_por: Y   # id global del área (0-133)
+
+tfidf:
+  ngram_range: [1, 2]
+  min_df: 3
+  max_df: 0.9
+  max_features: 100000
+  sublinear_tf: true
+
+revision:
+  umbral_confianza_dominio: 0.60
+  umbral_confianza_conjunta: 0.40

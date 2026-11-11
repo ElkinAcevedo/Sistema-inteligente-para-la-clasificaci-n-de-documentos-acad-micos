@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clasificador-ml"
+version = "0.1.0"
+description = "Preprocesamiento, entrenamiento y evaluación de los modelos del clasificador académico."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "pyarrow>=16.0",
+  "openpyxl>=3.1",
+  "scikit-learn>=1.5",
+  "spacy>=3.7",
+  "nltk>=3.9",
+  "joblib>=1.4",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+transformers = [
+  "torch>=2.3",
+  "transformers>=4.44",
+  "datasets>=2.20",
+]
+notebooks = [
+  "jupyterlab>=4.2",
+  "matplotlib>=3.9",
+  "seaborn>=0.13",
+]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

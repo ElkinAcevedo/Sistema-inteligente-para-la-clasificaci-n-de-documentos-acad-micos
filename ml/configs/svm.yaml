@@ -1,0 +1,5 @@
+modelo: linear_svc
+calibrar_probabilidades: true
+hiperparametros:
+  C: [0.1, 0.5, 1.0, 2.0]
+  class_weight: balanced
