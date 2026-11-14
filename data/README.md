@@ -30,3 +30,33 @@ data/raw/WebOfScience/
 ```
 
 Este proyecto usa `Meta-data/Data.xlsx` (equivalente a `WOS46985/`).
+
+> El `.zip` de Mendeley no trae la carpeta `WebOfScience/`: créala y descomprime dentro de ella.
+
+En Linux/macOS se puede hacer todo desde la terminal:
+
+```bash
+mkdir -p data/raw/WebOfScience && cd data/raw/WebOfScience
+curl -L -o wos.zip "https://data.mendeley.com/public-files/datasets/9rw3vkcfy4/files/c9ea673d-5542-44c0-ab7b-f1311f7d61df/file_downloaded"
+unzip wos.zip && rm wos.zip
+```
+
+## Generar las particiones
+
+```bash
+python -m clasificador_ml.datos
+```
+
+Resultado en `processed/`:
+
+| Archivo | Contenido |
+| --- | --- |
+| `train.parquet` | 32.888 documentos (70 %) |
+| `val.parquet` | 7.047 documentos (15 %) |
+| `test.parquet` | 7.048 documentos (15 %) |
+| `categorias.json` | Jerarquía de 7 dominios y 136 áreas, con nombres, alias y tamaños |
+
+Columnas de cada partición: `id_documento` (fila original del Excel), `texto` (resumen),
+`palabras_clave`, `id_dominio`, `dominio`, `id_area`, `area` e `y_original` (`Y` del dataset).
+
+Por qué son 136 áreas y no 134: ver [ADR 0002](../docs/decisiones/0002-etiquetas-wos.md).
