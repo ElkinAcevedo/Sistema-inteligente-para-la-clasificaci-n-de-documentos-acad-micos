@@ -35,7 +35,7 @@ Proyecto Integrador · Universidad de Pamplona · 2026
 Clasificar documentos académicos a mano es lento cuando el volumen crece. Este sistema recibe un documento (PDF, DOCX o TXT), extrae su resumen y predice en dos niveles:
 
 1. **Dominio académico** (7 clases), por ejemplo *Computer Science* o *Medical*.
-2. **Área temática** dentro de ese dominio (134 áreas en total), por ejemplo *Computer vision*.
+2. **Área temática** dentro de ese dominio (136 áreas en total, ver [ADR 0002](docs/decisiones/0002-etiquetas-wos.md)), por ejemplo *Computer vision*.
 
 Los modelos se entrenan con el dataset **Web of Science WOS-46985** (Kowsari et al., 2017), que contiene 46.985 resúmenes en inglés etiquetados jerárquicamente.
 
@@ -199,7 +199,7 @@ El dataset **no se incluye en el repositorio** por su tamaño. Las instrucciones
 
 | Fase | Semanas | Estado |
 | --- | --- | --- |
-| I. Revisión y preparación de los datos | 1–2 | ⏳ Pendiente |
+| I. Revisión y preparación de los datos | 1–2 | ✅ Dataset limpio y particionado ([ADR 0002](docs/decisiones/0002-etiquetas-wos.md)) |
 | II. Extracción y procesamiento del texto | 2–4 | ⏳ Pendiente |
 | III. Entrenamiento y evaluación de modelos | 4–7 | ⏳ Pendiente |
 | IV. Desarrollo e integración de la aplicación | 6–9 | 🚧 Estructura base y entorno listos |

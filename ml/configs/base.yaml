@@ -1,11 +1,16 @@
 # Parámetros compartidos por todos los experimentos (sección 6 del documento de diseño).
 semilla: 42
 
+datos:
+  # Áreas (dominio, Y) con menos documentos se descartan como ruido de etiquetado.
+  # Ver docs/decisiones/0002-etiquetas-wos.md.
+  min_documentos_por_area: 10
+
 particion:
   entrenamiento: 0.70
   validacion: 0.15
   prueba: 0.15
-  estratificar_por: Y   # id global del área (0-133)
+  estratificar_por: id_area   # id del área (par dominio + Y original), ver datos.py
 
 tfidf:
   ngram_range: [1, 2]

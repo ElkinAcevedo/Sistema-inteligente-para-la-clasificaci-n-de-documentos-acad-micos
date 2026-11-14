@@ -9,11 +9,22 @@ El paquete se instala en modo editable y lo importan **tanto los scripts de entr
 | Módulo | Responsabilidad | Fase |
 | --- | --- | --- |
 | `rutas.py` | Rutas estándar del repositorio (`data/`, `models/`, `configs/`). | — |
+| `configuracion.py` | Cargar un YAML de `configs/` combinado con `base.yaml`. | — |
 | `datos.py` | Cargar WOS-46985, limpiar, generar `categorias.json` y dividir 70/15/15. | I |
 | `preprocesamiento.py` | Normalización, *stopwords* y lematización en inglés. | II |
 | `jerarquico.py` | Clasificador de dominio + un clasificador de área por dominio. | III |
 | `entrenamiento.py` | Entrenar cada modelo candidato a partir de un archivo de `configs/`. | III |
 | `evaluacion.py` | Precisión, recall, F1 y matrices de confusión por nivel. | III |
+
+## Preparar el dataset (Fase I)
+
+Con el dataset en `data/raw/` (ver [`data/README.md`](../data/README.md)):
+
+```bash
+python -m clasificador_ml.datos
+```
+
+Genera `data/processed/{train,val,test}.parquet` y `categorias.json`. Las reglas de etiquetado están en [ADR 0002](../docs/decisiones/0002-etiquetas-wos.md).
 
 ## Configuraciones
 
