@@ -15,7 +15,7 @@ from app.core.config import settings
 def create_app() -> FastAPI:
     """Construye la aplicación FastAPI con su configuración y rutas."""
     aplicacion = FastAPI(
-        title="Clasificador de Documentos Académicos",
+        title="SICDA · Sistema Inteligente de Clasificación de Documentos Académicos",
         description="Clasifica documentos académicos por dominio y área temática (WOS-46985).",
         version=__version__,
         docs_url="/docs",

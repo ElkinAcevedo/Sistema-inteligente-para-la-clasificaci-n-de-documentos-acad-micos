@@ -18,7 +18,9 @@ export function Layout() {
   return (
     <div className="flex min-h-screen bg-slate-50 text-slate-900">
       <aside className="flex w-56 flex-col border-r border-slate-200 bg-white p-4">
-        <p className="mb-6 px-2 text-lg font-semibold">Clasificador</p>
+        <p className="mb-6 px-2 text-lg font-semibold" title="Sistema Inteligente de Clasificación de Documentos Académicos">
+          SICDA
+        </p>
         <nav className="flex flex-col gap-1">
           {enlaces.map(({ a, texto }) => (
             <NavLink
