@@ -1,6 +1,8 @@
 <div align="center">
 
-# Clasificador de Documentos Académicos
+# SICDA
+
+### Sistema Inteligente de Clasificación de Documentos Académicos
 
 **Aplicación web que clasifica documentos académicos por dominio y área temática usando Procesamiento de Lenguaje Natural y aprendizaje automático.**
 
@@ -78,7 +80,7 @@ La API carga el modelo activo una sola vez al iniciar y **nunca entrena durante 
 ## Estructura del repositorio
 
 ```text
-clasificador-academico/
+sicda/
 ├── backend/                 # API REST (FastAPI)
 │   ├── app/
 │   │   ├── api/v1/          # rutas y endpoints
@@ -134,8 +136,8 @@ No necesitas instalar Python a mano: `uv` descarga Python 3.12 solo para este pr
 ### 1. Clonar y configurar el entorno
 
 ```bash
-git clone https://github.com/ElkinAcevedo/Sistema-inteligente-para-la-clasificaci-n-de-documentos-acad-micos.git clasificador-academico
-cd clasificador-academico
+git clone https://github.com/ElkinAcevedo/sicda.git
+cd sicda
 ```
 
 Ejecuta el script de configuración de tu sistema operativo. Crea el entorno `.venv` con Python 3.12, instala las dependencias de Python y Node y descarga los recursos de lenguaje (spaCy y NLTK):
